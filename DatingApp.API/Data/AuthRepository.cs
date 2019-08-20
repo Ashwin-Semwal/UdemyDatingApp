@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using DatingApp.API.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace DatingApp.API.Data
 {
@@ -13,6 +14,15 @@ namespace DatingApp.API.Data
             this._context = context;
 
         }
+
+
+
+        public async Task<IEnumerable<User>> GetUsers()
+        {
+            var user = await _context.Users.ToListAsync();
+            return user;
+        }
+
         public async Task<User> Login(string username, string password)
         {
             var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
@@ -50,8 +60,13 @@ namespace DatingApp.API.Data
             user.PasswordSalt = pashwordSalt;
 
             await _context.Users.AddAsync(user);
+            try{
             await _context.SaveChangesAsync();
-
+            }
+            catch(Exception ex)
+            {
+              string msg = ex.Message;  
+            }
             return user;
 
         }

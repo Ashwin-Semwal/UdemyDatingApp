@@ -28,11 +28,19 @@ namespace DatingApp.API.Controllers
             _config = config;
         }
 
+       [HttpGet("getusers")]
+       public async Task<IActionResult> GetUsers()
+       {
+           var users = await _repo.GetUsers();
+           return Ok(users);
+       }
+
 
         [HttpPost("register")]
 
         public async Task<IActionResult> Register(UserForRegisterDTO model)
         {
+            
             model.Username = model.Username.ToLower();
 
             if (!await _repo.UserExists(model.Username))
@@ -54,6 +62,9 @@ namespace DatingApp.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDTO userForLoginDto)
         {
+
+            
+            
             var userfromrepo = await _repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userfromrepo == null)

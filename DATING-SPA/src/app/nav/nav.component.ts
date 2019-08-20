@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { ErrorInterceptor } from '../_services/error.interceptor';
 
 @Component({
   selector: 'app-nav',
@@ -19,7 +20,7 @@ export class NavComponent implements OnInit {
         console.log('Login Succesfull');
       },
       error => {
-        console.log('Failed to Login');
+        console.log(error);
       }
     );
   }
