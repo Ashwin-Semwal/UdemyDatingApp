@@ -1,0 +1,10 @@
+.dropdown-toggle
+{
+  cursor: pointer;
+}
+.dropdown-menu>a:hover
+{
+  cursor: pointer;
+  color:white;
+
+}

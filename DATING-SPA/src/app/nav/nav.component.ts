@@ -11,7 +11,7 @@ import { AlertifyService } from '../_services/alertify.service';
 export class NavComponent implements OnInit {
   model: any = {};
   
-  constructor(private authService: AuthService, private alertify: AlertifyService) {}
+  constructor(public authService: AuthService, private alertify: AlertifyService) {}
 
   ngOnInit() {}
 
@@ -19,7 +19,6 @@ export class NavComponent implements OnInit {
     this.authService.login(this.model).subscribe(
       response => {
         this.alertify.success('Login Succesfull');
-        this.model.uniquename = this.authService.decodedToken.unique_name;
       },
       error => {
         this.alertify.error(error);
@@ -33,6 +32,7 @@ export class NavComponent implements OnInit {
 
   loggedOut() {
     localStorage.removeItem('token');
+    this.model = {};
     this.alertify.success('Logged Out');
   }
 }
