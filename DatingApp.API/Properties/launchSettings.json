@@ -21,7 +21,7 @@
       "commandName": "Project",
       "launchUrl": "api/values",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "PRODUCTION"
+        "ASPNETCORE_ENVIRONMENT": "development"
       },
       "applicationUrl": "http://localhost:5000"
     }
